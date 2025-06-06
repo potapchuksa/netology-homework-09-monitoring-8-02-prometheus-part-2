@@ -34,6 +34,32 @@
 
 ### Решение
 
+Создал файл [alert_rules.yml](alert_rules.yml) с текстом из презентации.
+
+![](img/img-01-01.png)
+
+Прописал его в конфигурации Prometheus (/etc/prometheus/prometheus.yml)
+
+![](img/img-01-02.png)
+
+Перезапустил сервис и проверил его статус
+
+![](img/img-01-03.png)
+
+Проверил правило в Prometheus
+
+![](img/img-01-04.png)
+
+Остановил сервис node_exporter
+
+![](img/img-01-05.png)
+
+Проверил сработку в Prometheus
+
+![](img/img-01-06.png)
+
+![](img/img-01-07.png)
+
 ---
 
 ### Задание 2
@@ -43,6 +69,48 @@
 - [ ] Прикрепите скриншот Alerts из Prometheus, где правило оповещения будет в статусе Fireing, и скриншот из Alertmanager, где будет видно действующее правило оповещения
 
 ### Решение
+
+```
+wget https://github.com/prometheus/alertmanager/releases/download/v0.28.1/alertmanager-0.28.1.linux-amd64.tar.gz
+sudo cp alertmanager-0.28.1.linux-amd64/{alertmanager,amtool} /usr/local/bin/
+sudo cp alertmanager-0.28.1.linux-amd64/alertmanager.yml /etc/prometheus/
+sudo chown -R prometheus:prometheus /etc/prometheus/
+```
+
+Создал файл /etc/systemd/system/[alertmanager.service](alertmanager.service) примерно как в презентации
+
+![](img/img-02-01.png)
+
+Изменил /etc/prometheus/[alertmanager.yml](alertmanager.yml) как в презентации
+
+![](img/img-02-01-01.png)
+
+```
+sudo systemctl enable --now alertmanager.service
+sudo systemctl status alertmanager.service
+```
+
+![](img/img-02-02.png)
+
+![](img/img-02-03.png)
+
+Изменил конфигурацию Prometheus (/etc/prometheus/prometheus.yml)
+
+![](img/img-02-04.png)
+
+![](img/img-02-05.png)
+
+Остановил node_exporter
+
+![](img/img-02-06.png)
+
+Подождал когда правило перейдет в статус FIRING
+
+![](img/img-02-05.png)
+
+Проверил, что сработал Alertmanager
+
+![](img/img-02-05.png)
 
 ---
 

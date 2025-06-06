@@ -1,0 +1,21 @@
+global:
+  # Глобальные настройки (можно добавить smtp, slack и другие параметры)
+
+route:
+  # Настройки маршрутизации оповещений
+  group_by: ['alertname']       # Группировать оповещения по имени алерта
+  group_wait: 30s               # Ожидание перед первой отправкой (для группировки)
+  group_interval: 10m           # Интервал между оповещениями о новых сработках в группе
+  repeat_interval: 60m          # Интервал повторных оповещений для тех же алертов
+  receiver: 'email'             # Ресивер по умолчанию
+
+receivers:
+# Список получателей оповещений
+- name: 'email'                 # Название ресивера
+  email_configs:                # Настройки email-уведомлений
+  - to: 'yourmailto@todomain.com'
+    from: 'yourmailfrom@fromdomain.com'
+    smarthost: 'mailserver:25'  # SMTP сервер с портом
+    auth_username: 'user'       # Логин для аутентификации
+    auth_identity: 'user'       # Идентификатор (обычно совпадает с логином)
+    auth_password: 'paS$w0rd'   # Пароль (рекомендуется использовать secrets)
