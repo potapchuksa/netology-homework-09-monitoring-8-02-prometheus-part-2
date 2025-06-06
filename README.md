@@ -106,11 +106,11 @@ sudo systemctl status alertmanager.service
 
 Подождал когда правило перейдет в статус FIRING
 
-![](img/img-02-05.png)
+![](img/img-02-07.png)
 
 Проверил, что сработал Alertmanager
 
-![](img/img-02-05.png)
+![](img/img-02-08.png)
 
 ---
 
